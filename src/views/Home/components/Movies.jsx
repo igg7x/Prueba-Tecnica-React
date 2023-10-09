@@ -9,15 +9,16 @@ export const ListOfMovies = ({ movies }) => {
         width: "100%",
         display: "grid",
         gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-        gap: "1rem",
-        padding: "1rem",
+        gap: "16px",
+        padding: 0,
+        margin: 0,
       }}>
       {movies.map((movie) => (
         <MovieCard
-          key={movie.id}
-          title={movie.title}
-          release_date={movie.released}
-          backdrop_path={movie.poster}
+          key={movie.imdbID}
+          title={movie.Title}
+          release_date={movie.Year}
+          poster={movie.Poster}
         />
       ))}
     </div>
@@ -30,10 +31,9 @@ export const NoRenderMovies = () => {
 
 export const Movies = ({ loading, movies }) => {
   console.log(movies);
-
   return loading ? (
     "Loading Results"
-  ) : movies === undefined ? (
+  ) : movies.length === 0 ? (
     <NoRenderMovies />
   ) : (
     <ListOfMovies movies={movies} />

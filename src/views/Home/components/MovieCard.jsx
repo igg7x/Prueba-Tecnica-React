@@ -1,27 +1,23 @@
 import React from "react";
 
-const MovieCard = ({ title, release_date, backdrop_path }) => {
+const MovieCard = ({ title, release_date, poster }) => {
+  console.log(poster);
   return (
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        margin: "0 auto",
-        boxSizing: "border-box",
-      }}>
-      <div>
-        <h5 className="card-title">{title}</h5>
+    <div>
+      <div
+        style={{
+          margin: "0.5rem",
+        }}>
+        <h3 className="card-title">{title}</h3>
         <p className="card-text">{release_date}</p>
       </div>
       <img
         style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
+          marginTop: "16px",
           borderRadius: "1rem",
           opacity: "0.6",
         }}
-        src={backdrop_path}
+        src={poster}
         className="card-img-top"
         alt="movie poster image"
         draggable="false"
