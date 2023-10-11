@@ -8,14 +8,15 @@ export const ListOfMovies = ({ movies }) => {
       style={{
         width: "100%",
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-        gap: "16px",
+        gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+        gap: "32px",
         padding: 0,
         margin: 0,
       }}>
       {movies.map((movie) => (
         <MovieCard
           key={movie.imdbID}
+          movieId={movie.imdbID}
           title={movie.Title}
           release_date={movie.Year}
           poster={movie.Poster}
