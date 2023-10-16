@@ -31,7 +31,6 @@ export const NoRenderMovies = () => {
 };
 
 export const Movies = ({ loading, movies }) => {
-  console.log(movies);
   return loading ? (
     "Loading Results"
   ) : movies.length === 0 ? (

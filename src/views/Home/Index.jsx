@@ -7,11 +7,15 @@ const Home = () => {
   const [moviesValues, setMoviesValues] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [loading, setLoading] = useState(true);
+  const [sort, setSort] = useState(false);
 
   useEffect(() => {
     async function fetchingApi() {
       try {
         const data = await getMovies(searchValue);
+        if (sort) {
+          data.sort((a, b) => b.Year - a.Year);
+        }
         setMoviesValues(data || []);
       } catch (error) {
         throw new Error(error);
@@ -19,24 +23,31 @@ const Home = () => {
         setLoading(false);
       }
     }
+    console.log("fetchingApi");
     fetchingApi();
-  }, [searchValue]);
+  }, [searchValue, sort]);
 
+  const handleCheckSort = () => {
+    setSort(!sort);
+  };
   const handleSearchValue = (searchTerm) => {
     setSearchValue(searchTerm);
   };
   return (
     <div
       style={{
+        width: "100%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        width: "100%",
         justifyContent: "center",
-        minWidth: "1000px",
       }}>
       <header>
-        <SearchBar onSearch={handleSearchValue} />
+        <SearchBar
+          onSearch={handleSearchValue}
+          sort={sort}
+          onChangeSort={handleCheckSort}
+        />
       </header>
       <main
         style={{

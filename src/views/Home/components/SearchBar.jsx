@@ -1,6 +1,6 @@
 import { useSearch } from "../../../hooks/useSearch";
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = ({ onSearch, sort, onChangeSort }) => {
   const { search, updateSearch, error } = useSearch();
 
   const handleSubmit = (e) => {
@@ -48,6 +48,15 @@ const SearchBar = ({ onSearch }) => {
         <button type="submit">🔍</button>
       </div>
       {error && <span style={{ color: "red" }}>{error}</span>}
+      <div style={{ textAlign: "center" }}>
+        <label htmlFor="sort">Order By Year Released</label>
+        <input
+          type="checkbox"
+          id="sort"
+          onChange={onChangeSort}
+          checked={sort}
+        />
+      </div>
     </form>
   );
 };
