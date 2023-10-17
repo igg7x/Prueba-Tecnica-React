@@ -2,36 +2,23 @@ import React, { useEffect, useState, useRef } from "react";
 import SearchBar from "./components/SearchBar";
 import { Movies } from "./components/Movies";
 import { getMovies } from "../../service/movies";
+import { useMovies } from "../../hooks/useMovies";
 
 const Home = () => {
-  const [moviesValues, setMoviesValues] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
-  const [loading, setLoading] = useState(true);
   const [sort, setSort] = useState(false);
-
-  useEffect(() => {
-    async function fetchingApi() {
-      try {
-        const data = await getMovies(searchValue);
-        if (sort) {
-          data.sort((a, b) => b.Year - a.Year);
-        }
-        setMoviesValues(data || []);
-      } catch (error) {
-        throw new Error(error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    console.log("fetchingApi");
-    fetchingApi();
-  }, [searchValue, sort]);
+  const [searchValue, setSearchValue] = useState("");
+  const {
+    movies: moviesValues,
+    loading,
+    getMoviesValues,
+  } = useMovies(searchValue, sort);
 
   const handleCheckSort = () => {
     setSort(!sort);
   };
   const handleSearchValue = (searchTerm) => {
     setSearchValue(searchTerm);
+    getMoviesValues(searchTerm);
   };
   return (
     <div
