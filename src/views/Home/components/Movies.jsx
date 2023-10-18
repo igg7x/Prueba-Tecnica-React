@@ -9,7 +9,7 @@ export const ListOfMovies = ({ movies }) => {
         width: "100%",
         display: "grid",
         gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-        gap: "32px",
+        gap: "20px",
         padding: 0,
         margin: 0,
       }}>

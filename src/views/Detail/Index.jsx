@@ -4,15 +4,18 @@ import { useGetMovie } from "../../hooks/useGetMovie";
 const Detail = () => {
   const { movieId } = useParams();
   const { movie, getMovieInfo } = useGetMovie();
+
   useEffect(() => {
     getMovieInfo(movieId);
   }, [movieId]);
+
+  if (Object.keys(movie).length === 0) return <h3>Loading...</h3>;
 
   return (
     <section
       style={{
         display: "flex",
-        justifyContent: "space-around",
+        justifyContent: "center",
         alignItems: "center",
         flexWrap: "wrap",
         gap: "1rem",
@@ -20,9 +23,9 @@ const Detail = () => {
       }}>
       <article>
         <h3>{movie.Title}</h3>
+        <img src={movie.Poster} alt="movie-poster" />
         <p>{movie.Released}</p>
         <p>{movie.Overview}</p>
-        <img src={movie.Poster} alt="movie-poster" />
       </article>
       <article
         style={{
