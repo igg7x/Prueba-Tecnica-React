@@ -3,7 +3,7 @@ const api_key = import.meta.env.VITE_API_KEY;
 export const getMovies = async (searchValue = "search") => {
   try {
     const response = await fetch(
-      `http://www.omdbapi.com/?apikey=${api_key}&s=${searchValue}`
+      `https://www.omdbapi.com/?apikey=${api_key}&s=${searchValue}`
     );
     if (response.ok) {
       const data = await response.json();
@@ -17,7 +17,7 @@ export const getMovies = async (searchValue = "search") => {
 export const getMovie = async (id) => {
   try {
     const response = await fetch(
-      `http://www.omdbapi.com/?apikey=${api_key}&i=${id}`
+      `https://www.omdbapi.com/?apikey=${api_key}&i=${id}`
     );
     if (response.ok) {
       const data = await response.json();
