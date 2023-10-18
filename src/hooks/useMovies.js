@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { getMovies } from "../service/movies";
-export function useMovies({ search, sort }) {
+export function useMovies(search, sort) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const getMoviesValues = async (search) => {
+  const getMoviesValues = useCallback(async (search) => {
     try {
       setLoading(true);
       const values = await getMovies(search);
@@ -14,11 +14,11 @@ export function useMovies({ search, sort }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const sortMovies = () => {
+  const sortMovies = useMemo(() => {
     return sort ? [...movies].sort((a, b) => a.Year - b.Year) : movies;
-  };
+  }, [sort, movies]);
 
-  return { movies: sortMovies(), getMoviesValues, loading };
+  return { movies: sortMovies, getMoviesValues, loading };
 }

@@ -1,7 +1,14 @@
+import { useCallback } from "react";
 import { useSearch } from "../../../hooks/useSearch";
+import debounce from "just-debounce-it";
 
-const SearchBar = ({ onSearch, sort, onChangeSort }) => {
+const SearchBar = ({ onSearch, sort, onCheckSort, getMOvies }) => {
   const { search, updateSearch, error } = useSearch();
+
+  const debounceGetMovies = useCallback(
+    debounce((search) => getMOvies(search), 300),
+    [getMOvies]
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -11,6 +18,7 @@ const SearchBar = ({ onSearch, sort, onChangeSort }) => {
 
   const handleInputChange = (e) => {
     updateSearch(e.target.value);
+    debounceGetMovies(e.target.value);
   };
 
   return (
@@ -53,7 +61,7 @@ const SearchBar = ({ onSearch, sort, onChangeSort }) => {
         <input
           type="checkbox"
           id="sort"
-          onChange={onChangeSort}
+          onChange={onCheckSort}
           checked={sort}
         />
       </div>

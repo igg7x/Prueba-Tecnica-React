@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import SearchBar from "./components/SearchBar";
 import { Movies } from "./components/Movies";
-import { getMovies } from "../../service/movies";
 import { useMovies } from "../../hooks/useMovies";
 
 const Home = () => {
@@ -33,7 +32,8 @@ const Home = () => {
         <SearchBar
           onSearch={handleSearchValue}
           sort={sort}
-          onChangeSort={handleCheckSort}
+          onCheckSort={handleCheckSort}
+          getMOvies={getMoviesValues}
         />
       </header>
       <main
